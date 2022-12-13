@@ -45,14 +45,18 @@ public struct SlideOverCard<Content: View, Style: ShapeStyle>: View {
                     if #available(iOS 14.0, *) {
                         container
                             .ignoresSafeArea(.container, edges: .bottom)
+                            .transition(isiPad ? .opacity.combined(with: .offset(x: 0, y: 200)) : .move(edge: .bottom))
+                                .animation(.spring(response: 0.35, dampingFraction: 1))
                     } else {
                         container
                             .edgesIgnoringSafeArea(.bottom)
+                            .transition(isiPad ? .opacity.combined(with: .offset(x: 0, y: 200)) : .move(edge: .bottom))
+                                .animation(.spring(response: 0.35, dampingFraction: 1))
                     }
-                }.transition(isiPad ? .opacity.combined(with: .offset(x: 0, y: 200)) : .move(edge: .bottom))
+                }
                     .zIndex(2)
             }
-        }.animation(.spring(response: 0.35, dampingFraction: 1))
+        }
     }
     
     private var container: some View {
